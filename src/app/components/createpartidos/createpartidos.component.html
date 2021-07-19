@@ -1,0 +1,55 @@
+<body [@fadeIn]>
+    <h1 class="text-center">
+        Create Partidos
+    </h1>
+    <br>
+    <div class="text-center">
+        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalPart">
+  Launch demo modal
+</button>
+    
+<hr>
+<img src="../../../assets/img/Carrucel_imagen2.jpg" class="img-fluid" width="1200" height="700" alt="...">
+<!-- Modal -->
+
+<div class="modal fade" id="exampleModalPart" tabindex="-1" aria-labelledby="exampleModalLabelPart" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body"  >
+        <form class="text-center" (ngSubmit)="onSubmit(saveMatch)" #saveMatch="ngForm" >
+          <img class="text-center" src="../../../assets/img/Partidos.png" width="80" height="80" alt="">
+          <h3 class="text-center">Set Partidos</h3>
+          <div class="form-group">
+            <label for="selectGrupo" class="form-label">Torneo</label>
+            <select [(ngModel)]="torneoId" name="grupo" id="selectGrupo" class="form-control form-select">
+              <option *ngFor="let torneo of torneos" [value]="torneo._id" >{{torneo.name}}</option>
+            </select>
+          </div>
+          <label for="inputName" class="form-label"> Name</label>
+          <input [(ngModel)]="partido.name" class="form-control" type="text" name="name" id="inputName" required>
+          <div class="row">
+            <div class="form-group  col-md-6">
+              <label for="selecJornada" class="form-label">Team One</label>
+              <input [(ngModel)]="partido.teamTwo" class="form-control" type="text" name="name" id="inputName" required>
+
+            </div>
+            <div class="form-group  col-md-6">
+              <label for="selecJornada" class="form-label">Team Two</label>
+              <input [(ngModel)]="partido.teamOne" class="form-control" type="text" name="name" id="inputName" required>
+            </div>
+          </div>
+          <br>
+          <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary mx-2 "  [disabled]="!saveMatch.form.valid" (click)="sendTeamInfo(partido)">Save Match</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>

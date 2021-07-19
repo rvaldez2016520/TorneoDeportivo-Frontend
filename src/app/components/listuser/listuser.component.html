@@ -1,0 +1,23 @@
+
+  <div id="cards" [@fadeIn]>
+    <div>
+      <h1 class="text-center" >Ususarios Registrados</h1>
+    </div>
+    <hr>
+    <form  class="form-inline mx-auto ">
+      <div class="form-group col-md-3">
+        <input [(ngModel)]="search" type="search" class="form-control" name="search" placeholder="🔍Search">
+      </div>
+    </form>
+    <hr>
+    <div class="card myWidth text-center" style="width: 17rem;" *ngFor="let user of users | search:search">
+      <img  *ngIf="user.image" src="{{uri+'getImage/'+user.image}}" class=" mx-auto" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Datos</h5>
+        <hr>
+        <p class="card-text">{{user.name}}</p>
+        <p class="card-text">{{user.username}}</p>
+        <p class="card-text">{{user.email}}</p>
+      </div>
+    </div>
+  </div>

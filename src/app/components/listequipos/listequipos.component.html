@@ -1,0 +1,19 @@
+<div id="cards">
+    <div>
+      <h1 class="text-center" >Equipos Creados</h1>
+    </div>
+    <hr>
+    <div id="search" class="form-inline mx-auto d-flex">
+        <input type="search" class="form-control " name="search" placeholder="🔍  Search">
+    </div>
+        <hr>
+    <div class="card myWidth text-center" style="width: 17rem;" *ngFor="let team of Teams" >
+        <img width="200" height="200" src="../../../assets/img/united.png" class="rounded mx-auto d-block" alt="..." id="img">
+      <div class="card-body">
+        <h5 class="card-title">Data</h5>
+        <hr>
+        <p class="card-text">{{team.name}}</p>
+        <p class="card-text">{{team.nintegrantes}}</p>    
+      </div>
+    </div>
+  </div>

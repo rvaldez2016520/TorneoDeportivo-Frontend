@@ -1,0 +1,53 @@
+body{
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 90px;
+    padding-bottom: 15%;
+    background-color: black;
+
+}
+
+
+.bd-placeholder-img{
+    font-size: 1.1rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px){
+    .bd-placeholder-img-lg{
+        font-size: 3rem;
+    }
+}
+
+
+.form-signin{
+    width: 100%;
+    max-width: 600px;
+    padding: 15px;
+    margin: auto;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.form-control{
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 15px;
+}
+
+button{
+    border-radius: 5px;
+}
+
+button:hover{
+    transition: all 1s;
+    background-color: #B3B6B7;
+}

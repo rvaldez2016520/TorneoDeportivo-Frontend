@@ -1,0 +1,116 @@
+<body class="text-center" [@fadeIn]>
+    <div id="title">
+        <h1> Partidos En Curso </h1>
+    </div>
+ <br>
+      <table class="table" >
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Nombre del partido</th>
+            <th scope="col">Team One</th>
+            <th scope="col">Team Two</th>
+            <th scope="col">Team One goals</th>
+            <th scope="col">Team Two goals</th>
+            <th scope="col" class="text-center">Option</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let partido of Partidos,let i = index">
+          <tr>
+            <td>{{i}}</td>
+            <td>{{partido.name}}</td>
+            <td>{{partido.teamOne}}</td>
+            <td>{{partido.teamTwo}}</td>
+            <td>{{partido.goalsTeamOne}}</td>
+            <td>{{partido.goalsTeamTwo}}</td>
+            <td class="text-center"><button class="btn-danger  mx-2" (click)="obtenerData(partido)" data-bs-toggle="modal" data-bs-target="#exampleModal" >Finalizado</button> 
+              <button class="btn-success mx-2"  (click)="obtenerData(partido)" data-bs-toggle="modal" data-bs-target="#exampleModalPart">Update</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+      <div class="modal fade" id="exampleModalPart" tabindex="-1" aria-labelledby="exampleModalLabelPart" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"  >
+              <form class="text-center">
+                <img class="text-center" src="../../../assets/img/Partidos.png" width="80" height="80" alt="">
+                <h3 class="text-center">Set Partidos</h3>
+                <div class="form-group">
+                  <label for="selectGrupo" class="form-label">Torneo</label>
+                  <select [(ngModel)]="torneoId" name="grupo" id="selectGrupo" class="form-control form-select">
+                    <option *ngFor="let torneo of torneos" [value]="torneo._id" >{{torneo.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="inputName" class="form-label"> Name</label>
+                <input [(ngModel)]="partidoSelected.name" class="form-control" type="text" name="name" id="inputName" disabled>
+                </div>
+                <div class="row">
+                  <div class="form-group  col-md-6">
+                    <label for="selecJornada" class="form-label">Team One</label>
+                    <input [(ngModel)]="partidoSelected.teamTwo" class="form-control" type="text" name="teamOne" id="inputName"  disabled>
+      
+                  </div>
+                  <div class="form-group  col-md-6">
+                    <label for="selecJornada" class="form-label">Team Two</label>
+                    <input [(ngModel)]="partidoSelected.teamOne" class="form-control" type="text" name="teamTwo" id="inputName"  disabled>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group  col-md-6">
+                    <label for="selecJornada" class="form-label">Goals</label>
+                    <input [(ngModel)]="partidoSelected.goalsTeamOne" class="form-control" type="number" name="goalsTeamOne" id="inputName" >
+      
+                  </div>
+                  <div class="form-group  col-md-6">
+                    <label for="selecJornada" class="form-label">Goals</label>
+                    <input [(ngModel)]="partidoSelected.goalsTeamTwo" class="form-control" type="number" name="goalsTeamTwo" id="inputName" >
+                  </div>
+                </div>
+                <br>
+                <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success mx-2 " (click)="updatePartido()">Save Match</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+<!-- Modal Remove -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form >
+        <img src="../../../assets/img/borrar.png" width="80" height="80" alt="">
+        <h3> Finalizar partido</h3>
+        <label for="selectGrupo" class="form-label">Torneo</label>
+        <select [(ngModel)]="torneoId" name="grupo" id="selectGrupo" class="form-control form-select">
+          <option *ngFor="let torneo of torneos" [value]="torneo._id" >{{torneo.name}}</option>
+        </select>
+        <label for="inputname" class="form-label">Partido</label>
+        <input [(ngModel)]="partidoSelected.name" class="form-control" id="inputname" type="text" name="Remove" disabled >
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" (click)="removePartdo()" >Finalizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>

@@ -1,0 +1,91 @@
+<body class="text-center"  [@fadeIn]>
+    <form class="form-signin" #perfil="ngForm" (ngSubmit)="onSubmit()">
+            <img *ngIf="user.image" class="mb-4" width="100" height="90" id="img" src="{{uri+'getImage/'+user.image}}" alt="register">
+            <h1 class="h3 mb-3 font-weight-normal" >{{title}}</h1>
+            <div class="form-group">
+                <label for="inputName" class="form-label" >Name</label>
+                <input  class="form-control" id="inputName"  [(ngModel)]="user.name" name="name"  #name="ngModel" type="text" placeholder="your name" required>
+                <div *ngIf = "!name.valid && name.touched" class=" form-group alert alert-danger" > 
+                    Campo Obligatotio
+                 </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="inputUsername" class="form-label">Username</label>
+                    <input class="form-control"id="inputUsername" [(ngModel)]="user.username"  #username="ngModel" name="username" type="text" placeholder="Username" required>
+                   <div *ngIf = "!username.valid && username.touched" class="alert alert-danger">
+                    Campo Obligatotio
+                   </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword" class="form-label" >Password</label>
+                    <input class="form-control" id="inputPassword"  [(ngModel)]="user.password" #password="ngModel" name="password" type="password" placeholder="Password" required disabled>
+                    <div *ngIf = "!password.valid && password.touched" class="alert alert-danger">
+                        Campo Obligatotio
+                       </div>
+                 </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="form-label" >Email</label>
+                <input class="form-control" id="inputEmail"  [(ngModel)]="user.email" name="email" #email="ngModel" type="text" placeholder="name@example.com" required>
+                <div *ngIf = "!email.valid && email.touched" class="alert alert-danger">
+                    Campo Obligatotio
+                   </div>
+            </div><br>
+              <button type="submit" class="btn btn-success col-lg-2 mx-2" [disabled]="!perfil.form.valid" >Update</button>
+
+              <button type="button" class="btn btn-primary col-lg-2 mx-2" data-bs-toggle="modal" data-bs-target="#exampleModalUpload" >Upload</button>
+
+              <button type="button" class="btn btn-danger col-lg-2 mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+    </form>
+
+<!--Modal eliminar-->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Danger Zone!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img  class="mb-4" width="75" height="75" src="../../../assets/img/borrar.png" alt="register">
+                <h1 class="h3 mb-3 font-weight-normal">This action is irreversible!</h1>
+                <form #formRemove="ngForm" >
+                    <label for="passwordRemove" class="form-label"></label><br>
+                    <input [(ngModel)]="possiblePass"  name="possiblePass" type="password" id="passwordRemove" class="form-control" placeholder="password" required>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" [disabled]="!formRemove.form.valid" (click)="deleteUser()" >Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+ <!--Modal Subir imagen-->    
+ 
+ <div class="modal fade" id="exampleModalUpload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">User  Image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img  class="mb-4" width="75" height="75" src="../../../assets/img/img.png" alt="register">
+        <h1 class="h3 mb-3 font-weight-normal">Upload your Image </h1>
+        <form #formUpload="ngForm">
+          <label for="inputImage" class="form-label"></label><br>
+          <input name="Image" type="file" id="inputImage" class="form-control" (change)="fileChange($event)" required>
+      </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!formUpload.form.valid" (click)="uploadImage()" >Upload</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

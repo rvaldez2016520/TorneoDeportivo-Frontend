@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" >
+        <img src="../../../assets/img/pelota-de-futbol.png" alt="" width="25" height="24" class="d-inline-block align-text-top">  
+        Torneo Deportivo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav  ml-auto mb-2 mb-lg-0" >
+          <li class="nav-item">
+            <a class="nav-link " *ngIf="token == null || token != null &&  user.role == 'ROLE_USER'" routerLink="/home" routerLinkActivate="active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link "  *ngIf="token != null && user.role == 'ROLE_ADMIN'" routerLink="/home-admin" routerLinkActivate="active">Home Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="token == null" routerLink="/register" routerLinkActivate="active">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" *ngIf="token == null" routerLink="/login">Login</a>
+          </li>
+          <li class="nav-item dropdown" *ngIf="token != null || token != undefined ">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              More options
+            </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="/perfil">Public profile</a></li>
+              <li><a class="dropdown-item" *ngIf="token != null &&user.role == 'ROLE_ADMIN'" routerLink="/saveAdmin">Save Admin</a></li>
+              <li><a class="dropdown-item" *ngIf="token != null &&user.role == 'ROLE_ADMIN'" routerLink="/listuser">list Users</a></li>
+              <li><a class="dropdown-item" routerLink="/createTorneo">Create Tournament</a></li>
+              <li><a class="dropdown-item"  routerLink="/createTeam">Create Team</a></li>
+              <li><a class="dropdown-item"  routerLink="/createPartidos">Create Partido</a></li>
+              <li><a class="dropdown-item" *ngIf="token != null && user.role == 'ROLE_ADMIN'"  routerLink="/listTorneo">Created Tournaments</a></li>
+              <li><a class="dropdown-item" *ngIf="token != null && user.role == 'ROLE_ADMIN'" routerLink="/listTeam">Created Equipo</a></li>
+              <li><a class="dropdown-item"  routerLink="/listPart">Created Partidos</a></li>
+              <li><a class="dropdown-item"  routerLink="/tabla">Positions table</a></li>
+              <li><a class="dropdown-item"  routerLink="/graphics">Graphics</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav position-absolute top-50 end-0 translate-middle-y" *ngIf="token != null">
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal1">{{user.username}}</a>
+          </li>
+          <li class="nav-item dropdown">
+            <img *ngIf="user.image" width="40" height="40"  id="imgUser" src="{{uri+'getImage/'+user.image}}" alt="user image">
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav> 
+
+<!-- Modal cerrar -->
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-sm ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure to log out</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <h5 class="modal-title text-dark" ></h5>
+       <h1 class="h3 mb-3 font-weight-normal" *ngIf="user != null ">{{user.username}}</h1>
+       <img *ngIf="user != null && user.image" width="100" height="100"  id="imgUser" src="{{uri+'getImage/'+user.image}}" alt="user image">
+        <!--<img width="100" height="100"id="imgUser" src="../../../assets/img/user_1.png" alt="user image">-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary text-center mx-4"  data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger text-center mx-4" data-bs-dismiss="modal" (click)="logOut()">Log Out</button>
+      </div>
+    </div>
+  </div>
+</div>

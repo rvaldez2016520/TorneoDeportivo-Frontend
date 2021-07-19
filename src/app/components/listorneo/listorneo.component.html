@@ -1,0 +1,24 @@
+
+ <div id="cards" [@fadeIn]>
+  <h1 class="text-center" >Torneos Creados</h1>
+</div>
+<hr>
+<div id="search" class="form-inline mx-auto d-flex ">
+    <input [(ngModel)]="search" type="search" class="form-control me-2" name="search" placeholder="🔍  Search">
+    <button class="btn btn-outline-success mx-2" type="submit" routerLink="/home-admin">Home</button>
+    <button class="btn btn-outline-primary mx-2" type="submit" routerLink="/createGroup">Groups</button>
+</div>
+<hr>
+
+  <div id="cards">
+    <div class="card myWidth text-center" style="width: 17rem;" *ngFor="let torneo of torneos | search:search">
+        <img width="200" height="200" src="../../../assets/img/torneo (2).png" class="rounded mx-auto d-block" alt="..." id="img">
+      <div class="card-body">
+        <h5 class="card-title">Datos</h5>
+        <hr>
+        <p class="card-text">{{torneo.name}} </p>
+        <p class="card-text">{{torneo.typetournamen}}</p>
+        <p class="card-text">{{torneo.awards}}</p>
+      </div>
+    </div>
+  </div>

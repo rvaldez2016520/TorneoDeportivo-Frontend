@@ -1,0 +1,72 @@
+body{
+   padding: 10px;
+}
+
+
+.bd-placeholder-img{
+    font-size: 1.1rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px){
+    .bd-placeholder-img-lg{
+        font-size: 3rem;
+    }
+}
+
+button{
+    margin-top: 20px;
+}
+
+#title{
+    background-color: black;
+    color: white;
+}
+
+.form-signin{
+    width: 100%;
+    max-width: 650px;
+    padding: 15px;
+    margin: auto;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.form-control{
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 15px;
+}
+
+button{
+    border-radius: 5px;
+}
+
+button:hover{
+    transition: all 1s;
+    background-color: #B3B6B7;
+}
+
+img#img{
+        margin: 10px;
+         width: 170px;
+         height: 160px;
+         border-radius: 80px;
+}
+
+#cards{
+    margin: 1rem;
+}
+
+.myClass{
+    margin: 1.25rem;
+    display: inline-block;
+    background-color: white;
+    color: black;
+
+}

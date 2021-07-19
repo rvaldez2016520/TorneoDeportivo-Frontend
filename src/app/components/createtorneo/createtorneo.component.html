@@ -1,0 +1,119 @@
+<body class="" [@fadeIn]>
+    <!--BarraAcciones-->
+    <div id="title" class="text-center">
+        <h1 class="text-left">Crear Torneo</h1>
+    </div>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary col-lg-2 mx-4 " data-bs-toggle="modal" data-bs-target="#exampleModalAgregar">
+            Save
+          </button>
+          <button type="submit" class="btn btn-secondary col-lg-2 mx-4"  *ngIf="token != null &&user.role == 'ROLE_ADMIN'" routerLink="/listTorneo">
+            Toneos Creados
+          </button>
+          
+    </div>
+    <hr>
+    
+    <!--Modal Agregar Torneo-->
+
+    <div class="text-center">
+    <div class="modal fade" id="exampleModalAgregar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Save</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-signin" (ngSubmit)="onSubmit(saveTorneo)" #saveTorneo="ngForm" >
+                    <img  class="mb-4" width="75" height="75" src="../../../assets/img/torneo.png" alt="register">
+                        <h1 class="h3 mb-3 font-weight-normal" >Create Torneo</h1>
+                        <div class="form-gruop">
+                            <label  for="inputNametorneo" class="form-label" >Name</label>
+                            <input  [(ngModel)]="torneo.name" class="form-control" id="inputNametorneo" type="text" placeholder="Name" name="nametorneo" required>
+                        </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"   [disabled]="!saveTorneo.form.valid">Save</button>
+                      </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal eliminar torneo-->
+
+    <div class="modal fade  text-center" id="exampleModalEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Danger Zone</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <img class="mb-4" width="75" height="75" src="../../../assets/img/borrar.png" alt="Delete">
+              <h1 class="h3 mb-3 font-weight-normal">This action is irreversible!</h1>
+              <h4 class="text-center">{{torneoSelected.name}}</h4>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger"  data-bs-dismiss="modal" (click)="deleteTorneo()"  >Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!--Modal Actualizar toneo-->
+
+    <div class="modal fade text-center" id="exampleModalActualizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update Date</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form-signin">
+                    <img  class="mb-4" width="75" height="75" src="../../../assets/img/torneo.png" alt="register">
+                        <h1 class="h3 mb-3 font-weight-normal" >Update Torneo</h1>
+                        <div class="form-gruop">
+                            <label for="" class="form-label" >Name</label>
+                            <input [(ngModel)]="torneoSelected.name" class="form-control" type="text" name="name">
+                        </div>                        
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="updateTorneo()">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="cards" >
+        <div class="card myClass" style="width: 17rem;" *ngFor="let torneo of torneos, let i = index " >
+            <img width="200" height="200" src="../../../assets/img/torneo (2).png" class="rounded mx-auto d-block" alt="..." id="img">
+            <div class="card-body">
+              <h5 class="card-title text-center">Datas tournament</h5>
+              <hr>
+              <br>
+              <p class="card-text text-center">{{torneo.name}}</p>
+              <br>
+            <button type="button" class="btn btn-success mx-3" data-bs-toggle="modal" data-bs-target="#exampleModalActualizar" (click)="obtenerData(torneo)">
+                Update
+              </button>
+             <button type="button" class="btn btn-danger mx-4" data-bs-toggle="modal" data-bs-target="#exampleModalEliminar" (click)="obtenerData(torneo)">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+</body>
+
+
+    

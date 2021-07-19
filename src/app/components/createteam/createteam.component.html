@@ -1,0 +1,148 @@
+<body [@fadeIn] >
+    <div id="title" class="text-center">
+        <h1>Crear Equipo</h1>
+    </div>
+    <br>
+    <div class="text-center"><button type="button" class="btn btn-primary col-lg-2 mx-2 " data-bs-toggle="modal" data-bs-target="#exampleModal">Save</button>
+    
+    
+    </div>
+    <hr>
+
+    <!--Model Agregar-->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body  text-center">
+              <form class="form-signin" (ngSubmit)="onSubmit(saveTeam)" #saveTeam="ngForm">
+                <img  class="mb-4" width="75" height="75" src="../../../assets/img/colaboracion.png" alt="register">
+                <h1 class="h3 mb-3 font-weight-normal" >Create Team</h1>
+                <div class="form-group">
+                <select [(ngModel)]="torneoId" name="torneo" id="selectTorneo" class="form-control form-select">
+                    <option *ngFor="let torneo of torneos " [value]="torneo._id">{{torneo.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="inputNames" class="form-label">Name</label>
+                  <input [(ngModel)]="team.name" class="form-control" type="text" id="inputName" name="name" required >
+              </div>
+            <br>
+            <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary mx-2"  data-bs-dismiss="modal" [disabled]="!saveTeam.form.valid" >To Create</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+          
+    <!--Modal ELiminar-->
+
+    <div class="modal fade" id="exampleModalDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img class="mb-4" width="75" height="75" src="../../../assets/img/borrar.png" alt="Delete">
+                <h1 class="h3 mb-3 font-weight-normal">This action is irreversible!</h1>
+                  <form >
+                    <div class="form-group">
+                      <select [(ngModel)]="torneoId" name="torneo" id="selectTorneo" class="form-control form-select">
+                          <option *ngFor="let torneo of torneos " [value]="torneo._id">{{torneo.name}}</option>
+                        </select>
+                        </div>
+                        <br>
+                        <h5>{{teamSelected.name}}</h5>
+                      <br>
+                      <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-danger mx-2" (click)="remove()" >Delete</button>
+                  </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!--Modal Update-->
+
+    <div class="modal fade" id="exampleModalUpdate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <form class="form-signin">
+                    <img  class="mb-4" width="75" height="75" src="../../../assets/img/colaboracion.png" alt="register">
+                        <h1 class="h3 mb-3 font-weight-normal" >Create Team</h1>
+                        <div class="form-group">
+                          <select [(ngModel)]="torneoId" name="torneo" id="selectTorneo" class="form-control form-select">
+                              <option *ngFor="let torneo of torneos " [value]="torneo._id">{{torneo.name}}</option>
+                            </select>
+                            </div>
+                        <div class="form-group">
+                                <label for="inputname" class="form-label"> Nombre del Equipo</label>
+                                <input [(ngModel)]="teamSelected.name" id="inputname" class="form-control" type="text" name="name">
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-success mx-2" (click)="update()">Update</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    <!--card list-->
+<div id="cards" >
+    <div class="card  myClass  text-center" style="width: 20rem;" *ngFor="let team of teams">
+        <img src="../../../assets/img/united.png" width="200" height="200" class="ounded mx-auto d-block" alt="..."  >
+        <div class="card-body">
+          <h5 class="card-title">Data</h5>
+          <hr>
+          <p class="card-text">{{team.name}}</p>
+          <br>
+          <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal" data-bs-target="#exampleModalUpdate" (click)="obtenerData(team)" >Update</button>
+          <button type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#exampleModalDelete" (click)="obtenerData(team)" >Delete</button>
+       
+        <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#Upload" (click)="obtenerData(team)">Image</button>
+        </div>
+      </div>
+</div>
+
+</body>
+
+<!-- Modal image -->
+<div class="modal fade" id="Upload" tabindex="-1" aria-labelledby="Upload" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img  class="mb-4" width="75" height="75" src="../../../assets/img/img.png" alt="register">
+        <h1 class="h3 mb-3 font-weight-normal">Upload your Image </h1>
+        <form #Upload="ngForm">
+          <label for="inputImage" class="form-label"></label><br>
+          <input name="image" type="file" id="inputImage" class="form-control" (change)="fileChange($event)"  >
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="uploadImage()" >Upload</button>
+      </div>
+    </div>
+  </div>
+</div>
